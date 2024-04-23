@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # In[ ]:
-!git lfs get 
+
 import streamlit as st
 import numpy as np
 import tensorflow as tf
