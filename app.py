@@ -2,6 +2,7 @@
 # coding: utf-8
 
 # In[ ]:
+!git lfs get 
 import streamlit as st
 import numpy as np
 import tensorflow as tf
@@ -154,7 +155,7 @@ tf.keras.utils.get_custom_objects().update({'DWT': DWT})
 # output1 = "lesion_model_000296.h5"
 # if not os.path.exists("lesion_model_000296.h5"):
 #     gdown.download(url1, output1, quiet=False)
-    
+   
 fmodel = tf.keras.models.load_model("lesion_model_000068.h5")
     
 def preprocess_image(image):
