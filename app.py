@@ -179,30 +179,30 @@ def predict(image, model):
     mask = (fmask > 0.5).astype(np.uint8)*255 
     return np.reshape(mask,[256,256,1])
 
-def main():
-    # Set the app title and description
-    st.title("Breast tumour classification and segmentation")
-    st.markdown("This app uses a deep learning model to perform breast lesion classification and segmentation.")
+# def main():
+#     # Set the app title and description
+#     st.title("Breast tumour classification and segmentation")
+#     st.markdown("This app uses a deep learning model to perform breast lesion classification and segmentation.")
 
-    # Load the model
-#     model = load_model()
+#     # Load the model
+# #     model = load_model()
 
-    # Create a file uploader
-    uploaded_file = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
+#     # Create a file uploader
+#     uploaded_file = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
 
-    # Check if an image is uploaded
-    if uploaded_file is not None:
-        # Read the image and display it
-#         image = Image.open(uploaded_file)
-        image = load_img(uploaded_file)
-        st.image(image, caption='Uploaded Image', use_column_width=True)
+#     # Check if an image is uploaded
+#     if uploaded_file is not None:
+#         # Read the image and display it
+# #         image = Image.open(uploaded_file)
+#         image = load_img(uploaded_file)
+#         st.image(image, caption='Uploaded Image', use_column_width=True)
 
-        # Make a prediction and display the mask
-        mask = predict(image, fmodel)
-        st.image(mask, caption='Segmentated Lesion', use_column_width=True)
+#         # Make a prediction and display the mask
+#         mask = predict(image, fmodel)
+#         st.image(mask, caption='Segmentated Lesion', use_column_width=True)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
 
 
 with st.sidebar:
@@ -250,7 +250,7 @@ if choose=='About':
 # generate and plot augmented images
 
 elif choose=='AI-Predict':
-    model=load_model('monkey_pox1.h5')
+    # model=load_model('monkey_pox1.h5')
     image_paths1=[('b_0.png','sample1')]
     image_path2 =[('b_5.png','sample2')]
     image_path3 =[('b_10.png','sample3')]
