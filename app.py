@@ -201,3 +201,95 @@ if __name__ == '__main__':
     main()
 
 
+# with st.sidebar:
+#     choose = option_menu('App Gallery',['About','Monkeypox images','Non Monkeypox images','Images Augmentation','AI-Predict'],
+#                          icons=['house','image','image-fill','image-alt','question-diamond-fill'],
+#                          menu_icon='prescription2',default_index=0,
+#                          styles={
+#                              'container':{'padding':"5!important","background-color":"#fafafa"},
+#                              'icon':{"color":"orange","font-size":"25px"},
+#                              "nav-link":{"font-size":"16px","text-align":"left","margin":"0px","--hover-color":"#eee"},
+#                              "nav-link-selected": {"background-color":"#02ab21"},
+#                          })
+
+# if choose=='About':
+#     st.write("<h2>Monkeypox Skin Lesion Dataset<h2>",unsafe_allow_html=True)
+#     st.write("The dataset is collected from Kaggle, it includes **102 Monkeypox** images and **126 for others**. This is a binary classification problem to predict Monkeypox Vs Others (Chickenpox, Measles) and we will use Deep Learning with CNN using Tensorflow and Keras to build the model architecture")
+
+# elif choose=='Monkeypox images':
+#     st.write("<div align='center'><h3>Monkeypox Images<h3></div>",unsafe_allow_html=True)
+#     col1,col2,col3=st.columns(3)
+#     available_images=[]
+#     with col1:
+#         for i in range(2):
+#             rand1 = random.randint(0,20)
+#             if rand1 not in available_images:
+#                 img1=Image.open(monkey_glob[rand1])
+#                 st.image(img1)
+#                 available_images.append(rand1)
+#     with col2:
+#         for k in range(2):
+#             random2=random.randint(20,40)
+#             if random2 not in available_images:
+#                 img2=Image.open(monkey_glob[random2])
+#                 st.image(img2)
+#                 available_images.append(random2)
+#     with col3:
+#         for p in range(2):
+#             random3=random.randint(40,60)
+#             if random3 not in available_images:
+#                 img3=Image.open(monkey_glob[random3])
+#                 st.image(img3)
+#                 available_images.append(random3)
+
+
+# # generate and plot augmented images
+
+# elif choose=='AI-Predict':
+#     model=load_model('monkey_pox1.h5')
+#     image_paths1=[('b_0.png','sample1')]
+#     image_path2 =[('b_5.png','sample2')]
+#     image_path3 =[('b_10.png','sample3')]
+#     image_path4=[('b_12','sample4')]
+
+#     st.title("Image Classification")
+#     class_names = ['Monkeypox', 'Others']
+#     uploaded_file = st.file_uploader("",type=['jpg','jpeg','png'])
+#     if st.button('Predict'):
+#         if uploaded_file is not None:
+#             img=load_img(uploaded_file,target_size=(224,224))
+#             img=img_to_array(img)
+#             img=np.expand_dims(img,axis=0)
+#             img=img/255.0
+#             pred= model.predict(img)
+#             arg_max=np.argmax(pred)
+#             pred_int = pred[arg_max][0]
+#             if pred>0.5:
+#                 st.write(f"The model is {round(pred_int*100,2)}% confident that the image shows NO signs of Monkeypox")
+#             else:
+#                 st.write(f"The model is {round((1-pred_int)*100,2)}% confident that the image shows signs of Monkeypox")
+
+#     col1,col2,col3,col4=st.columns(4)
+#     with col1:
+#         for path, label in image_paths1:
+#             image = Image.open ( path )
+#             st.image ( image, caption=label )
+#     with col2:
+#         for path,label in image_path2:
+#             image=Image.open(path)
+#             st.image(image,caption=label)
+#     with col3:
+#         for path,label in image_path3:
+#             image=Image.open(path)
+#             st.image(image,caption=label)
+#     with col4:
+#         for path,label in image_path4:
+#             image=Image.open(path)
+#             st.image(image,caption=label)
+
+
+
+
+
+
+
