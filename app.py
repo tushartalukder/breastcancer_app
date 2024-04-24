@@ -167,7 +167,7 @@ def preprocess_image(image):
 
 def predict(image, model):
     image = preprocess_image(image)
-    image = tf.resize(image,(256,256))
+    image = tf.image.resize(image,(256,256))
     image = tf.reshape(image,[1,256,256,3])
     fmask = fmodel.predict(image)
     fmask = fmask
