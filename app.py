@@ -209,7 +209,7 @@ def predict(image, model):
 
 # if __name__ == '__main__':
 #     main()
-def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
+def apply_mask(image, mask, color=(255, 0, 0), alpha=0.2):
     # Convert the image and mask to float32 if necessary
     image = tf.cast(image, tf.float32)
     mask = tf.cast(mask, tf.float32)
