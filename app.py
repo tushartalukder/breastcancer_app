@@ -7,7 +7,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 import splitfolders
-
+from PIL import Image
 import numpy as np
 import tensorflow as tf
 from numpy import zeros
@@ -305,6 +305,7 @@ elif choose=='AI-Predict':
         # Make a prediction and display the mask
         mask = predict(image, fmodel)
         masked_image = apply_mask(image, mask)
+        masked_image = Image.fromarray(masked_image)
         print(masked_image.shape)
         st.image(masked_image, caption='Segmentated Lesion', use_column_width=True)
 
