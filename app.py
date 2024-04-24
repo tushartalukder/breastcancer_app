@@ -210,7 +210,11 @@ def predict(image, model):
 # if __name__ == '__main__':
 #     main()
 def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
-    masked_image = image.copy()
+    image_array = np.array(image)
+    
+    # Make a copy of the image array to avoid modifying the original image
+    masked_image = image_array.copy()
+    # masked_image = image.copy()
     for i in range(3):  # Loop over RGB channels
         masked_image[:, :, i] = np.where(mask == 1,masked_image[:, :, i] * (1 - alpha) + alpha * color[i], masked_image[:, :, i])
     return masked_image
