@@ -209,7 +209,13 @@ def predict(image, model):
 
 # if __name__ == '__main__':
 #     main()
-
+def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
+    masked_image = image.copy()
+    for i in range(3):  # Loop over RGB channels
+        masked_image[:, :, i] = np.where(mask == 1,
+                                          masked_image[:, :, i] * (1 - alpha) + alpha * color[i],
+                                          masked_image[:, :, i])
+    return masked_image
 
 with st.sidebar:
     choose = option_menu('App Gallery',['About','Breast Ultrasound Images','AI-Predict'],
@@ -264,23 +270,17 @@ elif choose=='AI-Predict':
 
     st.title("Breast tumour classification and segmentation")
     st.markdown("This app uses a deep learning model to perform breast lesion classification and segmentation.")
-
-    # Load the model
-#     model = load_model()
-
-    # Create a file uploader
     uploaded_file = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
 
     # Check if an image is uploaded
     if uploaded_file is not None:
         # Read the image and display it
-#         image = Image.open(uploaded_file)
         image = load_img(uploaded_file)
         st.image(image, caption='Uploaded Image', use_column_width=True)
-
         # Make a prediction and display the mask
         mask = predict(image, fmodel)
-        st.image(mask, caption='Segmentated Lesion', use_column_width=True)
+        masked_image = apply_mask(image, mask)
+        st.image(masked_image, caption='Segmentated Lesion', use_column_width=True)
 
 
     # st.title("Image Classification")
