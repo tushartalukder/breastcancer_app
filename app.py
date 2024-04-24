@@ -4,6 +4,10 @@
 # In[ ]:
 
 import streamlit as st
+from streamlit_option_menu import option_menu
+
+import splitfolders
+
 import numpy as np
 import tensorflow as tf
 from numpy import zeros
