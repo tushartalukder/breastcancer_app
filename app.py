@@ -318,7 +318,9 @@ elif choose=='AI-Predict':
     #         image=Image.open(path)
     #         st.image(image,caption=label)
 
+import gc
 
+gc.collect()
 
 
 
