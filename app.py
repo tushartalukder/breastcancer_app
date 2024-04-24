@@ -161,7 +161,7 @@ tf.keras.utils.get_custom_objects().update({'DWT': DWT})
 #     gdown.download(url1, output1, quiet=False)
    
 fmodel = tf.keras.models.load_model("gmodel_000002.h5")
-opt = Adam(lr=0.00008, beta_1=0.5)
+opt = Adam(learning_rate=0.00008, beta_1=0.5)
 fmodel.compile(loss=['binary_crossentropy'],optimizer=opt)
 
 
