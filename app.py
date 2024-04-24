@@ -177,8 +177,8 @@ def predict(image, model):
 
 def main():
     # Set the app title and description
-    st.title("Brain Hemorrhage Lesion Segmenter from CT Images")
-    st.markdown("This app uses a deep learning model to perform brain hemorrhage lesion segmentation.")
+    st.title("Breast tumour classification and segmentation")
+    st.markdown("This app uses a deep learning model to perform breast lesion classification and segmentation.")
 
     # Load the model
 #     model = load_model()
