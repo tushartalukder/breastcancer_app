@@ -173,7 +173,7 @@ def predict(image, model):
     fmask = fmask
     fmask = np.squeeze(fmask, axis=0)
     mask = (fmask > 0.5).astype(np.uint8)*255 
-    return np.reshape(mask,[256,256,3])
+    return np.reshape(mask,[256,256,1])
 
 def main():
     # Set the app title and description
@@ -195,7 +195,7 @@ def main():
 
         # Make a prediction and display the mask
         mask = predict(image, fmodel)
-        st.image(mask[:,:,0], caption='Segmentated Lesion', use_column_width=True)
+        st.image(mask, caption='Segmentated Lesion', use_column_width=True)
 
 if __name__ == '__main__':
     main()
