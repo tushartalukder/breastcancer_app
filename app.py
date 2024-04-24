@@ -28,7 +28,7 @@ from keras.layers import Input, Conv2D, MaxPooling2D, Conv2DTranspose, concatena
 from keras.models import Model, model_from_json
 from keras.optimizers import Adam
 from keras.layers import ELU, LeakyReLU
-from keras.utils.vis_utils import plot_model
+from keras.utils import plot_model
 from keras import models, layers
 from tensorflow.keras import backend as K
 import pywt
