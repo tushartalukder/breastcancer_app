@@ -156,7 +156,7 @@ tf.keras.utils.get_custom_objects().update({'DWT': DWT})
 # if not os.path.exists("lesion_model_000296.h5"):
 #     gdown.download(url1, output1, quiet=False)
    
-fmodel = tf.keras.models.load_model("lesion_model_000068.h5")
+fmodel = tf.keras.models.load_model("gmodel_000002.h5")
     
 def preprocess_image(image):
     image = np.array(image)
@@ -201,20 +201,20 @@ if __name__ == '__main__':
     main()
 
 
-# with st.sidebar:
-#     choose = option_menu('App Gallery',['About','Monkeypox images','Non Monkeypox images','Images Augmentation','AI-Predict'],
-#                          icons=['house','image','image-fill','image-alt','question-diamond-fill'],
-#                          menu_icon='prescription2',default_index=0,
-#                          styles={
-#                              'container':{'padding':"5!important","background-color":"#fafafa"},
-#                              'icon':{"color":"orange","font-size":"25px"},
-#                              "nav-link":{"font-size":"16px","text-align":"left","margin":"0px","--hover-color":"#eee"},
-#                              "nav-link-selected": {"background-color":"#02ab21"},
-#                          })
+with st.sidebar:
+    choose = option_menu('App Gallery',['About','Monkeypox images','AI-Predict'],
+                         icons=['house','image','question-diamond-fill'],
+                         menu_icon='prescription2',default_index=0,
+                         styles={
+                             'container':{'padding':"5!important","background-color":"#fafafa"},
+                             'icon':{"color":"orange","font-size":"25px"},
+                             "nav-link":{"font-size":"16px","text-align":"left","margin":"0px","--hover-color":"#eee"},
+                             "nav-link-selected": {"background-color":"#02ab21"},
+                         })
 
-# if choose=='About':
-#     st.write("<h2>Monkeypox Skin Lesion Dataset<h2>",unsafe_allow_html=True)
-#     st.write("The dataset is collected from Kaggle, it includes **102 Monkeypox** images and **126 for others**. This is a binary classification problem to predict Monkeypox Vs Others (Chickenpox, Measles) and we will use Deep Learning with CNN using Tensorflow and Keras to build the model architecture")
+if choose=='About':
+    st.write("<h2>Monkeypox Skin Lesion Dataset<h2>",unsafe_allow_html=True)
+    st.write("The dataset is collected from Kaggle, it includes **102 Monkeypox** images and **126 for others**. This is a binary classification problem to predict Monkeypox Vs Others (Chickenpox, Measles) and we will use Deep Learning with CNN using Tensorflow and Keras to build the model architecture")
 
 # elif choose=='Monkeypox images':
 #     st.write("<div align='center'><h3>Monkeypox Images<h3></div>",unsafe_allow_html=True)
@@ -243,49 +243,70 @@ if __name__ == '__main__':
 #                 available_images.append(random3)
 
 
-# # generate and plot augmented images
+# generate and plot augmented images
 
-# elif choose=='AI-Predict':
-#     model=load_model('monkey_pox1.h5')
-#     image_paths1=[('b_0.png','sample1')]
-#     image_path2 =[('b_5.png','sample2')]
-#     image_path3 =[('b_10.png','sample3')]
-#     image_path4=[('b_12','sample4')]
+elif choose=='AI-Predict':
+    model=load_model('monkey_pox1.h5')
+    image_paths1=[('b_0.png','sample1')]
+    image_path2 =[('b_5.png','sample2')]
+    image_path3 =[('b_10.png','sample3')]
+    image_path4=[('b_12.png','sample4')]
 
-#     st.title("Image Classification")
-#     class_names = ['Monkeypox', 'Others']
-#     uploaded_file = st.file_uploader("",type=['jpg','jpeg','png'])
-#     if st.button('Predict'):
-#         if uploaded_file is not None:
-#             img=load_img(uploaded_file,target_size=(224,224))
-#             img=img_to_array(img)
-#             img=np.expand_dims(img,axis=0)
-#             img=img/255.0
-#             pred= model.predict(img)
-#             arg_max=np.argmax(pred)
-#             pred_int = pred[arg_max][0]
-#             if pred>0.5:
-#                 st.write(f"The model is {round(pred_int*100,2)}% confident that the image shows NO signs of Monkeypox")
-#             else:
-#                 st.write(f"The model is {round((1-pred_int)*100,2)}% confident that the image shows signs of Monkeypox")
+    st.title("Breast tumour classification and segmentation")
+    st.markdown("This app uses a deep learning model to perform breast lesion classification and segmentation.")
 
-#     col1,col2,col3,col4=st.columns(4)
-#     with col1:
-#         for path, label in image_paths1:
-#             image = Image.open ( path )
-#             st.image ( image, caption=label )
-#     with col2:
-#         for path,label in image_path2:
-#             image=Image.open(path)
-#             st.image(image,caption=label)
-#     with col3:
-#         for path,label in image_path3:
-#             image=Image.open(path)
-#             st.image(image,caption=label)
-#     with col4:
-#         for path,label in image_path4:
-#             image=Image.open(path)
-#             st.image(image,caption=label)
+    # Load the model
+#     model = load_model()
+
+    # Create a file uploader
+    uploaded_file = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
+
+    # Check if an image is uploaded
+    if uploaded_file is not None:
+        # Read the image and display it
+#         image = Image.open(uploaded_file)
+        image = load_img(uploaded_file)
+        st.image(image, caption='Uploaded Image', use_column_width=True)
+
+        # Make a prediction and display the mask
+        mask = predict(image, fmodel)
+        st.image(mask, caption='Segmentated Lesion', use_column_width=True)
+
+
+    # st.title("Image Classification")
+    # class_names = ['Monkeypox', 'Others']
+    # uploaded_file = st.file_uploader("",type=['jpg','jpeg','png'])
+    # if st.button('Predict'):
+    #     if uploaded_file is not None:
+    #         img=load_img(uploaded_file,target_size=(224,224))
+    #         img=img_to_array(img)
+    #         img=np.expand_dims(img,axis=0)
+    #         img=img/255.0
+    #         pred= model.predict(img)
+    #         arg_max=np.argmax(pred)
+    #         pred_int = pred[arg_max][0]
+    #         if pred>0.5:
+    #             st.write(f"The model is {round(pred_int*100,2)}% confident that the image shows NO signs of Monkeypox")
+    #         else:
+    #             st.write(f"The model is {round((1-pred_int)*100,2)}% confident that the image shows signs of Monkeypox")
+
+    # col1,col2,col3,col4=st.columns(4)
+    # with col1:
+    #     for path, label in image_paths1:
+    #         image = Image.open ( path )
+    #         st.image ( image, caption=label )
+    # with col2:
+    #     for path,label in image_path2:
+    #         image=Image.open(path)
+    #         st.image(image,caption=label)
+    # with col3:
+    #     for path,label in image_path3:
+    #         image=Image.open(path)
+    #         st.image(image,caption=label)
+    # with col4:
+    #     for path,label in image_path4:
+    #         image=Image.open(path)
+    #         st.image(image,caption=label)
 
 
 
