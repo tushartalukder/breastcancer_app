@@ -212,7 +212,7 @@ def predict(image, model):
 
 
 with st.sidebar:
-    choose = option_menu('App Gallery',['About','Monkeypox images','AI-Predict'],
+    choose = option_menu('App Gallery',['About','Breast Ultrasound Images','AI-Predict'],
                          icons=['house','image','question-diamond-fill'],
                          menu_icon='prescription2',default_index=0,
                          styles={
@@ -223,8 +223,8 @@ with st.sidebar:
                          })
 
 if choose=='About':
-    st.write("<h2>Monkeypox Skin Lesion Dataset<h2>",unsafe_allow_html=True)
-    st.write("The dataset is collected from Kaggle, it includes **102 Monkeypox** images and **126 for others**. This is a binary classification problem to predict Monkeypox Vs Others (Chickenpox, Measles) and we will use Deep Learning with CNN using Tensorflow and Keras to build the model architecture")
+    st.write("<h2>Breast lesion classification and segmentation from ultrasound images<h2>",unsafe_allow_html=True)
+    st.write("DSP Research Laboratory")
 
 # elif choose=='Monkeypox images':
 #     st.write("<div align='center'><h3>Monkeypox Images<h3></div>",unsafe_allow_html=True)
