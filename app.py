@@ -221,6 +221,8 @@ def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
     masked_image = image * (1 - alpha * mask) + alpha * mask * color
     
     # Clip values to be in the range [0, 255]
+    masked_image = masked_image/255.0
+    
     # masked_image = tf.clip_by_value(masked_image, 0, 255)
     
     # Convert the masked image to uint8
