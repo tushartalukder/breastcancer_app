@@ -215,7 +215,7 @@ def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
     mask = tf.cast(mask, tf.float32)
     image = tf.image.resize(image,(256,256))
     # Expand dimensions of the mask to match the image
-    mask = tf.expand_dims(mask)
+    # mask = tf.expand_dims(mask)
     
     # Apply the mask to the image
     masked_image = image * (1 - alpha * mask) + alpha * mask * color
