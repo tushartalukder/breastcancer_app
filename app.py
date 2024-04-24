@@ -210,16 +210,37 @@ def predict(image, model):
 # if __name__ == '__main__':
 #     main()
 def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
-    image_array = np.array(image)
+    # Convert the image and mask to float32 if necessary
+    image = tf.cast(image, tf.float32)
+    mask = tf.cast(mask, tf.float32)
+    image = tf.image.resize(image,(256,256))
+    # Expand dimensions of the mask to match the image
+    mask = tf.expand_dims(mask)
     
-    # Make a copy of the image array to avoid modifying the original image
-    masked_image = image_array.copy()
-    masked_image = tf.image.resize(masked_image,(256,256))
-    # image = tf.reshape(image,[1,256,256,3])
-    # masked_image = image.copy()
-    for i in range(3):  # Loop over RGB channels
-        masked_image[:, :, i] = np.where(mask == 1,masked_image[:, :, i] * (1 - alpha) + alpha * color[i], masked_image[:, :, i])
+    # Apply the mask to the image
+    masked_image = image * (1 - alpha * mask) + alpha * mask * color
+    
+    # Clip values to be in the range [0, 255]
+    masked_image = tf.clip_by_value(masked_image, 0, 255)
+    
+    # Convert the masked image to uint8
+    masked_image = tf.cast(masked_image, tf.uint8)
+    
     return masked_image
+
+
+
+# def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
+#     image_array = np.array(image)
+    
+#     # Make a copy of the image array to avoid modifying the original image
+#     masked_image = image_array.copy()
+#     masked_image = tf.image.resize(masked_image,(256,256))
+#     # image = tf.reshape(image,[1,256,256,3])
+#     # masked_image = image.copy()
+#     for i in range(3):  # Loop over RGB channels
+#         masked_image[:, :, i] = np.where(mask == 1,masked_image[:, :, i] * (1 - alpha) + alpha * color[i], masked_image[:, :, i])
+#     return masked_image
 
 with st.sidebar:
     choose = option_menu('App Gallery',['About','Breast Ultrasound Images','AI-Predict'],
