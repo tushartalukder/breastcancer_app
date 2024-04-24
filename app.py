@@ -159,7 +159,9 @@ tf.keras.utils.get_custom_objects().update({'DWT': DWT})
 # output1 = "lesion_model_000296.h5"
 # if not os.path.exists("lesion_model_000296.h5"):
 #     gdown.download(url1, output1, quiet=False)
-   
+
+
+@st.experimental_memo
 fmodel = tf.keras.models.load_model("gmodel_000002.h5")
 opt = Adam(learning_rate=0.00008, beta_1=0.5)
 fmodel.compile(loss=['binary_crossentropy'],optimizer=opt)
