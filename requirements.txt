@@ -1,4 +1,5 @@
 streamlit-option-menu
+split-folders
 Flask==2.2.3
 keras
 matplotlib
