@@ -214,6 +214,8 @@ def apply_mask(image, mask, color=(255, 0, 0), alpha=0.5):
     
     # Make a copy of the image array to avoid modifying the original image
     masked_image = image_array.copy()
+    masked_image = tf.image.resize(masked_image,(256,256))
+    # image = tf.reshape(image,[1,256,256,3])
     # masked_image = image.copy()
     for i in range(3):  # Loop over RGB channels
         masked_image[:, :, i] = np.where(mask == 1,masked_image[:, :, i] * (1 - alpha) + alpha * color[i], masked_image[:, :, i])
