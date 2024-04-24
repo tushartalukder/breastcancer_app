@@ -38,7 +38,8 @@ from tensorflow.keras import backend as K
 import pywt
 from numpy import asarray
 from tensorflow.keras.utils import CustomObjectScope
-@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=False)
+# @st.experimental_memo
 class DWT(layers.Layer):
     """
     Discrete Wavelet transform - tensorflow - keras
@@ -161,7 +162,7 @@ tf.keras.utils.get_custom_objects().update({'DWT': DWT})
 #     gdown.download(url1, output1, quiet=False)
 
 
-@st.experimental_memo
+
 fmodel = tf.keras.models.load_model("gmodel_000002.h5")
 opt = Adam(learning_rate=0.00008, beta_1=0.5)
 fmodel.compile(loss=['binary_crossentropy'],optimizer=opt)
