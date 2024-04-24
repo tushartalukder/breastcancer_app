@@ -156,11 +156,11 @@ tf.keras.utils.get_custom_objects().update({'DWT': DWT})
 # if not os.path.exists("lesion_model_000296.h5"):
 #     gdown.download(url1, output1, quiet=False)
    
-fmodel = tf.keras.models.load_model("lesion_model_000068.h5")
+fmodel = tf.keras.models.load_model("gmodel_000002.h5")
     
 def preprocess_image(image):
     image = np.array(image)
-    image = (image.astype('float32')-127.5) / 127.5
+    image = (image.astype('float32')) /255
     image = np.expand_dims(image, axis=0)
     #     image = tf.reshape(image,[1,256,256,3])
     return image
@@ -170,7 +170,7 @@ def predict(image, model):
     image = tf.resize(image,(256,256))
     image = tf.reshape(image,[1,256,256,3])
     fmask = fmodel.predict(image)
-    fmask = (fmask+1)/2
+    fmask = fmask
     fmask = np.squeeze(fmask, axis=0)
     mask = (fmask > 0.5).astype(np.uint8)*255 
     return np.reshape(mask,[256,256,3])
