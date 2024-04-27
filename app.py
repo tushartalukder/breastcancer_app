@@ -167,7 +167,7 @@ fmodel = tf.keras.models.load_model("lesion_model_000172.h5")
 bmodel = tf.keras.models.load_model("background_model_000172.h5")
 opt = Adam(learning_rate=0.00008, beta_1=0.5)
 fmodel.compile(loss=['binary_crossentropy'],optimizer=opt)
-
+bmodel.compile(loss=['binary_crossentropy'],optimizer=opt)
 
 def preprocess_image(image):
     image = np.array(image)
