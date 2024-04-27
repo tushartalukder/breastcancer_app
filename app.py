@@ -163,7 +163,8 @@ tf.keras.utils.get_custom_objects().update({'DWT': DWT})
 
 
 
-fmodel = tf.keras.models.load_model("gmodel_000002.h5")
+fmodel = tf.keras.models.load_model("lesion_model_000172.h5")
+bmodel = tf.keras.models.load_model("background_model_000172.h5")
 opt = Adam(learning_rate=0.00008, beta_1=0.5)
 fmodel.compile(loss=['binary_crossentropy'],optimizer=opt)
 
@@ -180,9 +181,15 @@ def predict(image, model):
     image = tf.image.resize(image,(256,256))
     image = tf.reshape(image,[1,256,256,3])
     fmask = fmodel.predict(image)
-    fmask = fmask
-    fmask = np.squeeze(fmask, axis=0)
-    mask = (fmask > 0.5).astype(np.uint8)*255 
+    bmask = bmodel.predict(image)
+    
+    fmask = np.around(fmask)
+    bmask = np.around(bmask)
+    mask = np.logical_and(fmask,bmask)
+    mask = np.squeeze(mask, axis=0)
+    mask = (mask > 0.5).astype(np.uint8)*255 
+
+    
     return np.reshape(mask,[256,256,1])
 
 # def main():
